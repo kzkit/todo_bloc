@@ -1,6 +1,6 @@
 # todo_bloc
 
-A new Flutter project.
+A To Do List app using BLoC state management.
 
 ## Getting Started
 
