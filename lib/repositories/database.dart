@@ -39,12 +39,11 @@ class DBProvider {
   //add new Task
   newTask(Task task) async {
     final db = await database;
-    var res = await db.insert('task', task.toJson());
-    return res;
+    await db.insert('task', task.toJson());
   }
 
   //get all Task
-  getTasks() async {
+  Future<List<Task>> getTasks() async {
     final db = await database;
     var res = await db.query('task');
     //put into a list of Tasks if table is not empty
@@ -56,10 +55,8 @@ class DBProvider {
   updateTask(Task task) async {
     final db = await database;
     //update task according to id
-    var res = await db
+    await db
         .update('task', task.toJson(), where: 'id = ?', whereArgs: [task.id]);
-
-    return res;
   }
 
   deleteTask(int id) async {

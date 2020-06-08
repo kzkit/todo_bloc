@@ -30,8 +30,28 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     }
   }
 
-  Stream<TaskState> _mapGetTaskToState(TaskEvent event) async* {}
-  Stream<TaskState> _mapAddTaskToState(TaskEvent event) async* {}
-  Stream<TaskState> _mapEditTaskToState(TaskEvent event) async* {}
-  Stream<TaskState> _mapDeleteTaskToState(TaskEvent event) async* {}
+  Stream<TaskState> _mapGetTaskToState(GetTasks event) async* {
+    try {
+      final List<Task> tasks = await dbProvider.getTasks();
+      yield TaskLoaded(task: tasks);
+    } catch (_) {}
+  }
+
+  Stream<TaskState> _mapAddTaskToState(AddTask event) async* {
+    try {
+      await dbProvider.newTask(event.task);
+    } catch (_) {}
+  }
+
+  Stream<TaskState> _mapEditTaskToState(EditTask event) async* {
+    try {
+      await dbProvider.updateTask(event.task);
+    } catch (_) {}
+  }
+
+  Stream<TaskState> _mapDeleteTaskToState(DeleteTask event) async* {
+    try {
+      await dbProvider.deleteTask(event.id);
+    } catch (_) {}
+  }
 }

@@ -10,7 +10,7 @@ class TaskEmpty extends TaskState {
 }
 
 class TaskLoaded extends TaskState {
-  final Task task;
+  final List<Task> task;
 
   TaskLoaded({@required this.task}) : assert(task != null);
 
