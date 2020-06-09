@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todo_bloc/bloc/task_bloc.dart';
 import 'package:todo_bloc/widgets/task_list.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_bloc/widgets/add_task.dart';
 
 class App extends StatelessWidget {
   @override
@@ -15,7 +16,13 @@ class App extends StatelessWidget {
         child: TaskList(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: null,
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => TaskAdder(),
+              ));
+        },
         child: Icon(
           Icons.add,
         ),
