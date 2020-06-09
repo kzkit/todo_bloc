@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:todo_bloc/bloc/task_bloc.dart';
+import 'package:todo_bloc/repositories/database.dart';
 import 'package:todo_bloc/widgets/app.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +17,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: App(),
+      home: BlocProvider<TaskBloc>(
+        create: (context) => TaskBloc(dbProvider: DBProvider.db),
+        child: App(),
+      ),
     );
   }
 }
