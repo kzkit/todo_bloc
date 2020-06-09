@@ -7,6 +7,7 @@ import 'package:todo_bloc/model/task.dart';
 class DBProvider {
   //create a singleton
   DBProvider._();
+  static final DBProvider db = DBProvider._();
   Database _db;
 
   Future<Database> get database async {
