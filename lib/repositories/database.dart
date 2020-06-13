@@ -31,7 +31,10 @@ class DBProvider {
       await db.execute('''
                 CREATE TABLE task(
                     id INTEGER PRIMARY KEY,
-                    contents TEXT DEFAULT ''
+                    task TEXT DEFAULT '',
+                    priority TEXT DEFAULT '',
+                    note TEXT DEFAULT '',
+                    dateTime TEXT DEFAULT '',
                 )
             ''');
     });

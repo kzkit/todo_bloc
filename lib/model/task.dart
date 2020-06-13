@@ -29,4 +29,7 @@ class Task extends Equatable {
         "priority": priority,
         "dateTime": dateTime,
       };
+
+  //TODO: Check posibility of using enum for priority? How to store enum to DB
+
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:todo_bloc/bloc/task_bloc.dart';
 import 'package:todo_bloc/widgets/task_list.dart';
 import 'package:todo_bloc/widgets/add_task.dart';
 
