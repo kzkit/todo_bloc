@@ -23,8 +23,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
       yield* _mapGetTaskToState(event);
     } else if (event is AddTask) {
       yield* _mapAddTaskToState(event);
-    } else if (event is EditTask) {
-      yield* _mapEditTaskToState(event);
     } else if (event is DeleteTask) {
       yield* _mapDeleteTaskToState(event);
     }
@@ -33,7 +31,12 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   Stream<TaskState> _mapGetTaskToState(GetTasks event) async* {
     try {
       final List<Task> tasks = await dbProvider.getTasks();
-      yield TaskLoaded(task: tasks);
+      print(tasks.length);
+      if (tasks != null && tasks.length > 0) {
+        yield TaskLoaded(task: tasks);
+      } else {
+        yield TaskEmpty();
+      }
     } catch (_) {}
   }
 
@@ -41,15 +44,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     try {
       await dbProvider.newTask(event.task);
       final List<Task> tasks = await dbProvider.getTasks();
-      yield TaskLoaded(task: tasks);
-    } catch (_) {}
-  }
-
-  Stream<TaskState> _mapEditTaskToState(EditTask event) async* {
-    try {
-      await dbProvider.updateTask(event.task);
-      final List<Task> tasks = await dbProvider.getTasks();
-      yield TaskLoaded(task: tasks);
+      if (tasks != null && tasks.length > 0) {
+        yield TaskLoaded(task: tasks);
+      } else {
+        yield TaskEmpty();
+      }
     } catch (_) {}
   }
 
@@ -57,7 +56,11 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
     try {
       await dbProvider.deleteTask(event.id);
       final List<Task> tasks = await dbProvider.getTasks();
-      yield TaskLoaded(task: tasks);
+      if (tasks != null && tasks.length > 0) {
+        yield TaskLoaded(task: tasks);
+      } else {
+        yield TaskEmpty();
+      }
     } catch (_) {}
   }
 }

@@ -8,7 +8,9 @@ import 'package:todo_bloc/widgets/add_task.dart';
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    BlocProvider.of<TaskBloc>(context).add(GetTasks());
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         centerTitle: true,
         title: Text('Tasks'),

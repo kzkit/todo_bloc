@@ -33,6 +33,7 @@ class _TaskAdderState extends State<TaskAdder> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         title: Text('Add Task'),
       ),
@@ -66,7 +67,7 @@ class _TaskAdderState extends State<TaskAdder> {
                     width: 10,
                   ),
                   RaisedButton(
-                    color: Colors.blue,
+                    color: Theme.of(context).accentColor,
                     child: Text('Choose Date'),
                     onPressed: () => _selectDate(context),
                   )
@@ -120,7 +121,7 @@ class _TaskAdderState extends State<TaskAdder> {
                 minWidth: 150.00,
                 height: 40.00,
                 child: RaisedButton(
-                  color: Colors.blue,
+                  color: Theme.of(context).accentColor,
                   child: Text('Add Task'),
                   onPressed: () {
                     if (_formKey.currentState.validate()) {

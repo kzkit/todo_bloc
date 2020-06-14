@@ -15,7 +15,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+        primaryColor: Color.fromRGBO(48, 63, 159, 1),
+        accentColor: Color.fromRGBO(3, 169, 244, 1),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: BlocProvider<TaskBloc>(
