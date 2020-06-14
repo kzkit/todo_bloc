@@ -28,15 +28,8 @@ class DBProvider {
     return await openDatabase(path, version: 1, onOpen: (db) async {},
         onCreate: (Database db, int version) async {
       // Create the task table
-      await db.execute('''
-                CREATE TABLE task(
-                    id INTEGER PRIMARY KEY,
-                    task TEXT DEFAULT '',
-                    priority TEXT DEFAULT '',
-                    note TEXT DEFAULT '',
-                    dateTime TEXT DEFAULT '',
-                )
-            ''');
+      await db.execute(
+          'CREATE TABLE task(id INTEGER PRIMARY KEY, task TEXT, priority TEXT, note TEXT, dateTime text)');
     });
   }
 
