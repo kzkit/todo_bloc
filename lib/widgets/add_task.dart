@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:todo_bloc/model/task.dart';
+import 'package:uuid/uuid.dart';
 
 class TaskAdder extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class _TaskAdderState extends State<TaskAdder> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _taskTextController = TextEditingController();
   final TextEditingController _noteTextController = TextEditingController();
+  var uuid = Uuid();
 
   DateTime selectedDate = DateTime.now();
 
@@ -92,7 +95,6 @@ class _TaskAdderState extends State<TaskAdder> {
                         onChanged: (value) {
                           setState(() {
                             priorityTask = value;
-                            print(priorityTask);
                           });
                         },
                       ),
@@ -107,7 +109,6 @@ class _TaskAdderState extends State<TaskAdder> {
                         onChanged: (value) {
                           setState(() {
                             priorityTask = value;
-                            print(priorityTask);
                           });
                         },
                       ),
@@ -123,8 +124,16 @@ class _TaskAdderState extends State<TaskAdder> {
                   child: Text('Add Task'),
                   onPressed: () {
                     if (_formKey.currentState.validate()) {
-                      //TODO: should change all the text to Task model then send it back via navigator
-                      // Navigator.pop(context, //result too);
+                      //I don't know if this is the best way to implement with bloc.
+                      //TODO: Find out a better way? This part seems like it should be seperated from UI
+                      Task task = Task.fromJson({
+                        "id": DateTime.now().millisecondsSinceEpoch,
+                        "task": _taskTextController.text,
+                        "note": _noteTextController.text,
+                        "priority": priorityTask,
+                        "dateTime": selectedDate.toIso8601String(),
+                      });
+                      Navigator.pop(context, task);
                     }
                   },
                 ),
