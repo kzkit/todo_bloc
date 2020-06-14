@@ -31,7 +31,6 @@ class TaskBloc extends Bloc<TaskEvent, TaskState> {
   Stream<TaskState> _mapGetTaskToState(GetTasks event) async* {
     try {
       final List<Task> tasks = await dbProvider.getTasks();
-      print(tasks.length);
       if (tasks != null && tasks.length > 0) {
         yield TaskLoaded(task: tasks);
       } else {
